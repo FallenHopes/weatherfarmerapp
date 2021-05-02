@@ -29,7 +29,7 @@ class ReportsList extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (ctx) => ReportScreen(
-                        reportId: context.watch<ReportsService>().reports[i].id,
+                        report: context.watch<ReportsService>().reports[i],
                         oldContext: context,
                       )
                     )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weatherfarmer/domain/notification_class.dart';
+import 'package:weatherfarmer/domain/reports_class.dart';
 import '../services/notifications_service.dart';
 import '../services/reports_service.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -120,12 +121,12 @@ class FieldScreen extends StatelessWidget {
                         ),
                         onPressed: (){
                           oldContext.read<NotificationsService>().removeNotification(field.id);
-                          oldContext.read<ReportsService>().addReport(field.id, 'Отчёт: ${field.title}');
+                          ReportsClass report = oldContext.read<ReportsService>().addReport(field.id, 'Отчёт: ${field.title}');
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => ReportScreen(
-                                reportId: field.id,
+                                report: report,
                                 oldContext: oldContext
                               )
                             )

@@ -12,8 +12,10 @@ class ReportsService with ChangeNotifier{
     notifyListeners();
   }
 
-  void addReport(String id, String name){
-    reports.add(ReportsClass(id: id, name: name));
+  ReportsClass addReport(String id, String name){
+    ReportsClass tmp = ReportsClass(id: id, name: name);
+    reports.add(tmp);
+    return tmp;
     // async code
   }
 }

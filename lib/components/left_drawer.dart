@@ -28,7 +28,10 @@ class LeftPanel extends StatelessWidget {
                 screenChanger(0);
                 Navigator.of(context).pop();
               },
-              trailing: context.watch<NotificationsService>().notifications != null ? Container(
+              trailing: context.watch<NotificationsService>().notifications != null 
+              &&
+              context.watch<NotificationsService>().notifications.length != 0
+              ? Container(
                 width: 25,
                 height: 25,
                 alignment: Alignment.center,

@@ -2,7 +2,7 @@ import 'package:weatherfarmer/domain/notification_class.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'toast_service.dart';
 import 'package:flutter/material.dart';
 
 class NotificationsService with ChangeNotifier{
@@ -18,15 +18,7 @@ class NotificationsService with ChangeNotifier{
         notifications.add(NotificationClass.fromJson(field));
       });
     } catch (e) {
-      print(e);
-      Fluttertoast.showToast(
-        msg: 'Что-то пошло не так...',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white
-      );
+      ToastService().tst("Загрузка уведомлений не удалась: ${e}", Colors.red);
     }
     loading = false;
     notifyListeners();
