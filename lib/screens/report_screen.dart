@@ -27,7 +27,14 @@ class _ReportScreenState extends State<ReportScreen> {
       appBar: AppBar(
         title: Text("${report.name}")
       ),
-      body: Container(
+      body: GestureDetector(
+        onTap: (){
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if(!currentFocus.hasPrimaryFocus){
+            currentFocus.unfocus();
+          }
+        },
+        child: Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: ListView(
@@ -124,8 +131,47 @@ class _ReportScreenState extends State<ReportScreen> {
               ),
             ),
             _headtitle("Химическая обработка:"),
+            _customCheckBox('Глифосатная'),
+            _customCheckBox('Подкормка'),
+            _customCheckBox('Гербицидная'),
+            _customCheckBox('Инсектицидная'),
+            _customCheckBox('Фунгицидная'),
+            _customCheckBox('Десикация'),
+            _headtitle("Препараты (наименование, дозировка)"),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context).primaryColor
+                ),
+                borderRadius: BorderRadius.circular(5.0)
+              ),
+              margin: EdgeInsets.symmetric(
+                horizontal: 25,
+                vertical: 15
+              ),
+              child: TextFormField(
+                initialValue: report.drugs,
+                onChanged: (val){
+                  setState((){
+                    report.drugs = val;
+                  });
+                },
+                maxLines: 3,
+                cursorHeight: 20,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Введите название, дозировку препаратов в литрах, либо в кг/га",
+                  hintStyle: TextStyle(
+                    color: Colors.grey
+                  )
+                ),
+              ),
+            ),
+            _headtitle("Выявленные болезни:"),
           ],
         ),
+      )
       )
     );
   }
@@ -191,6 +237,31 @@ class _ReportScreenState extends State<ReportScreen> {
           elevation: MaterialStateProperty.all<double>(2.0)
         ),
       ),
+    );
+  }
+
+  Widget _customCheckBox(String value){
+    return Container(
+      margin: EdgeInsets.symmetric(
+        horizontal: 25,
+      ),
+      child: CheckboxListTile(
+        value: report.chemicalTreatment.contains(value),
+        onChanged: (val){
+          setState((){
+            val 
+            ?
+            report.chemicalTreatment.add(value)
+            :
+            report.chemicalTreatment.remove(value);
+          });
+        },
+        title: Text(
+          value,
+          style: TextStyle(fontSize: 20),
+        ),
+        activeColor: Theme.of(context).primaryColor,
+      )
     );
   }
 }

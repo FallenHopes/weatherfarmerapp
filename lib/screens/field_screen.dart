@@ -54,8 +54,9 @@ class FieldScreen extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.grey
-                )
+                  color: Theme.of(context).primaryColor
+                ),
+                borderRadius: BorderRadius.circular(5.0)
               ),
             ),
             myText('Расположение на карте:'),
