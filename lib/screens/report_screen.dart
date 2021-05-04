@@ -7,7 +7,7 @@ import 'package:weatherfarmer/services/toast_service.dart';
 
 class ReportScreen extends StatefulWidget {
   ReportScreen({@required this.report, @required this.oldContext});
-  
+
   ReportsClass report;
   BuildContext oldContext;
 
@@ -37,6 +37,7 @@ class _ReportScreenState extends State<ReportScreen> {
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: ListView(
+          physics: BouncingScrollPhysics(),
           children: <Container>[
             _headtitle("Выберите обрабатываемую культуру:"),
             Container(
@@ -171,7 +172,7 @@ class _ReportScreenState extends State<ReportScreen> {
             Container(
               child: ListView.builder(
                 itemCount: widget.report.illness.length,
-                itemBuilder: (context, i) => Container(
+                itemBuilder: (context, i){print(widget.report.illness[i]); return Container(
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Theme.of(context).primaryColor
@@ -199,7 +200,8 @@ class _ReportScreenState extends State<ReportScreen> {
                           ),
                           onPressed: (){
                             setState((){
-                              
+                              widget.report.illness.remove(widget.report.illness[i]);
+                              print(widget.report.illness);
                             });
                           },
                         ),
@@ -284,7 +286,7 @@ class _ReportScreenState extends State<ReportScreen> {
                       ),
                     ],
                   ),
-                ),
+                );},
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
