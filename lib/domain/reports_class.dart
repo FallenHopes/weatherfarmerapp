@@ -17,4 +17,8 @@ class ReportsClass{
   List<Map<String, dynamic>> illness = [];
   ReportsClass({ this.id, this.name, this.culture, this.workDate, this.agregate, this.chemicalTreatment,
   this.drugs, this.illness});
+
+  void removeIllness(int idx){
+    this.illness.removeAt(idx);
+  }
 }

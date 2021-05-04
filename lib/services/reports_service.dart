@@ -10,13 +10,13 @@ class ReportsService with ChangeNotifier{
         id: '3', 
         name: 'Отчёт: Поле 3', 
         chemicalTreatment: [], 
-        illness: [{'name': '', 'percent': '', 'effect': ''}]
+        illness: []
       ),
       ReportsClass(
         id: '4', 
         name: 'Отчёт: Поле 4', 
         chemicalTreatment: [], 
-        illness: [{'name': '', 'percent': '', 'effect': ''}]
+        illness: []
       )
     ];
     notifyListeners();
@@ -27,7 +27,7 @@ class ReportsService with ChangeNotifier{
       id: id, 
       name: name, 
       chemicalTreatment: [],
-      illness: [{'name': '', 'percent': '', 'effect': ''}]
+      illness: []
     );
     reports.add(tmp);
     return tmp;

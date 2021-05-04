@@ -3,29 +3,28 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:weatherfarmer/domain/reports_class.dart';
 import 'package:weatherfarmer/services/reports_service.dart';
+import 'package:weatherfarmer/services/toast_service.dart';
 
 class ReportScreen extends StatefulWidget {
+  ReportScreen({@required this.report, @required this.oldContext});
+  
   ReportsClass report;
   BuildContext oldContext;
-  ReportScreen({@required this.report, @required this.oldContext});
 
   @override
-  _ReportScreenState createState() => _ReportScreenState(report: report, oldContext: oldContext);
+  _ReportScreenState createState() => _ReportScreenState();
 }
 
 class _ReportScreenState extends State<ReportScreen> {
-  ReportsClass report;
-  BuildContext oldContext;
-  List culture = ['Озимая пшеница','Яровая пшеница','Ячмень','Лен масличный',
+  final List culture = ['Озимая пшеница','Яровая пшеница','Ячмень','Лен масличный',
   'Подсолнечник','Нут','Чечевица','Горох','Соя','Кукуруза','Сорго, Просо',
   'Гречиха','Горчица'];
 
-  _ReportScreenState({@required this.report, @required this.oldContext});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${report.name}")
+        title: Text("${widget.report.name}")
       ),
       body: GestureDetector(
         onTap: (){
@@ -57,10 +56,10 @@ class _ReportScreenState extends State<ReportScreen> {
                   color: Colors.black,
                   fontSize: 20
                 ),
-                value: report.culture,
+                value: widget.report.culture,
                 onChanged: (newCulture){
                   setState((){
-                    report.culture = newCulture;
+                    widget.report.culture = newCulture;
                   });
                 },
                 items: culture.map((c){
@@ -72,7 +71,7 @@ class _ReportScreenState extends State<ReportScreen> {
               ),
             ),
             _headtitle("Дата проведения работ:"),
-            _dateconfigure(report.workDate),
+            _dateconfigure(widget.report.workDate),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 60),
               child: _button(
@@ -81,7 +80,7 @@ class _ReportScreenState extends State<ReportScreen> {
                 ()async{
                   final DateTime picked = await showDatePicker(
                     context: context, 
-                    initialDate: report.workDate, 
+                    initialDate: widget.report.workDate, 
                     firstDate: DateTime(2000), 
                     lastDate: DateTime(2050),
                     helpText: "Дата проведения работ",
@@ -101,9 +100,9 @@ class _ReportScreenState extends State<ReportScreen> {
                       );
                     }
                   );
-                  if (picked != null && picked != report.workDate){
+                  if (picked != null && picked != widget.report.workDate){
                     setState((){
-                      report.workDate = picked;
+                      widget.report.workDate = picked;
                     });
                   }
                 }
@@ -114,10 +113,10 @@ class _ReportScreenState extends State<ReportScreen> {
               margin: EdgeInsets.symmetric(vertical: 20),
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: TextFormField(
-                initialValue: report.agregate,
+                initialValue: widget.report.agregate,
                 onChanged: (newVal){
                   setState((){
-                    report.agregate = newVal;
+                    widget.report.agregate = newVal;
                   });
                 },
                 decoration: InputDecoration(
@@ -150,10 +149,10 @@ class _ReportScreenState extends State<ReportScreen> {
                 vertical: 15
               ),
               child: TextFormField(
-                initialValue: report.drugs,
+                initialValue: widget.report.drugs,
                 onChanged: (val){
                   setState((){
-                    report.drugs = val;
+                    widget.report.drugs = val;
                   });
                 },
                 maxLines: 3,
@@ -171,7 +170,7 @@ class _ReportScreenState extends State<ReportScreen> {
             _headtitle("Выявленные болезни:"),
             Container(
               child: ListView.builder(
-                itemCount: report.illness.length,
+                itemCount: widget.report.illness.length,
                 itemBuilder: (context, i) => Container(
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -198,7 +197,11 @@ class _ReportScreenState extends State<ReportScreen> {
                               fontSize: 20
                             ),
                           ),
-                          onPressed: (){},
+                          onPressed: (){
+                            setState((){
+                              
+                            });
+                          },
                         ),
                       ),
                       Container(
@@ -207,10 +210,10 @@ class _ReportScreenState extends State<ReportScreen> {
                           vertical: 15
                         ),
                         child: TextFormField(
-                          initialValue: report.illness[i]['name'],
+                          initialValue: widget.report.illness[i]['name'],
                           onChanged: (newVal){
                             setState((){
-                              report.illness[i]['name'] = newVal;
+                              widget.report.illness[i]['name'] = newVal;
                             });
                           },
                           textAlign: TextAlign.center,
@@ -229,14 +232,14 @@ class _ReportScreenState extends State<ReportScreen> {
                       Container(
                         margin: EdgeInsets.symmetric(
                           horizontal: 40,
-                          vertical: 15
+                          vertical: 85
                         ),
                         child: TextFormField(
                           keyboardType: TextInputType.number,
-                          initialValue: report.illness[i]['percent'],
+                          initialValue: widget.report.illness[i]['percent'],
                           onChanged: (newVal){
                             setState((){
-                              report.illness[i]['percent'] = newVal;
+                              widget.report.illness[i]['percent'] = newVal;
                             });
                           },
                           textAlign: TextAlign.center,
@@ -253,15 +256,17 @@ class _ReportScreenState extends State<ReportScreen> {
                         )
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 40,
-                          vertical: 15
+                        margin: EdgeInsets.only(
+                          top: 155,
+                          bottom: 15,
+                          left: 40,
+                          right: 40
                         ),
                         child: TextFormField(
-                          initialValue: report.illness[i]['effect'],
+                          initialValue: widget.report.illness[i]['effect'],
                           onChanged: (newVal){
                             setState((){
-                              report.illness[i]['effect'] = newVal;
+                              widget.report.illness[i]['effect'] = newVal;
                             });
                           },
                           textAlign: TextAlign.center,
@@ -294,7 +299,7 @@ class _ReportScreenState extends State<ReportScreen> {
                 Theme.of(context).primaryColor,
                 (){
                   setState((){
-                    report.illness.add({'name': '', 'percent': '', 'effect': ''});
+                    widget.report.illness.add({'name': '', 'percent': '', 'effect': ''});
                   });
                 }
               ),
@@ -323,7 +328,7 @@ class _ReportScreenState extends State<ReportScreen> {
   Widget _dateconfigure(DateTime date){
     if (date == null){
       date = DateTime.now();
-      report.workDate = date;
+      widget.report.workDate = date;
     }
     String days;
     String month;
@@ -376,14 +381,14 @@ class _ReportScreenState extends State<ReportScreen> {
         horizontal: 25,
       ),
       child: CheckboxListTile(
-        value: report.chemicalTreatment.contains(value),
+        value: widget.report.chemicalTreatment.contains(value),
         onChanged: (val){
           setState((){
             val 
             ?
-            report.chemicalTreatment.add(value)
+            widget.report.chemicalTreatment.add(value)
             :
-            report.chemicalTreatment.remove(value);
+            widget.report.chemicalTreatment.remove(value);
           });
         },
         title: Text(
