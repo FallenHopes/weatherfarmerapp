@@ -6,14 +6,29 @@ class ReportsService with ChangeNotifier{
 
   void getReportsFromLocalStorage() async{
     reports = <ReportsClass>[
-      ReportsClass(id: '3', name: 'Отчёт: Поле 3', chemicalTreatment: []),
-      ReportsClass(id: '4', name: 'Отчёт: Поле 4', chemicalTreatment: [])
+      ReportsClass(
+        id: '3', 
+        name: 'Отчёт: Поле 3', 
+        chemicalTreatment: [], 
+        illness: [{'name': '', 'percent': '', 'effect': ''}]
+      ),
+      ReportsClass(
+        id: '4', 
+        name: 'Отчёт: Поле 4', 
+        chemicalTreatment: [], 
+        illness: [{'name': '', 'percent': '', 'effect': ''}]
+      )
     ];
     notifyListeners();
   }
 
   ReportsClass addReport(String id, String name){
-    ReportsClass tmp = ReportsClass(id: id, name: name, chemicalTreatment: []);
+    ReportsClass tmp = ReportsClass(
+      id: id, 
+      name: name, 
+      chemicalTreatment: [],
+      illness: [{'name': '', 'percent': '', 'effect': ''}]
+    );
     reports.add(tmp);
     return tmp;
     // async code

@@ -2,7 +2,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 
 class ToastService{
-  void tst(String msg, Color backgroundColor){
+  ToastService.tst(String msg, Color backgroundColor){
     Fluttertoast.showToast(
         msg: msg,
         toastLength: Toast.LENGTH_LONG,

@@ -123,7 +123,7 @@ class _ReportScreenState extends State<ReportScreen> {
                 decoration: InputDecoration(
                   hintText: "Введите название",
                 ),
-                cursorHeight: 30,
+                cursorHeight: 20,
                 style: TextStyle(
                   fontSize: 20
                 ),
@@ -169,6 +169,136 @@ class _ReportScreenState extends State<ReportScreen> {
               ),
             ),
             _headtitle("Выявленные болезни:"),
+            Container(
+              child: ListView.builder(
+                itemCount: report.illness.length,
+                itemBuilder: (context, i) => Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Theme.of(context).primaryColor
+                    )
+                  ),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 15
+                  ),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: <Widget>[
+                      Positioned(
+                        top: -20,
+                        right: -20,
+                        child: FloatingActionButton(
+                          backgroundColor: Colors.red.shade300,
+                          elevation: 2,
+                          mini: true,
+                          child: Text(
+                            "x",
+                            style: TextStyle(
+                              fontSize: 20
+                            ),
+                          ),
+                          onPressed: (){},
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 15
+                        ),
+                        child: TextFormField(
+                          initialValue: report.illness[i]['name'],
+                          onChanged: (newVal){
+                            setState((){
+                              report.illness[i]['name'] = newVal;
+                            });
+                          },
+                          textAlign: TextAlign.center,
+                          cursorHeight: 20,
+                          style: TextStyle(
+                            fontSize: 20
+                          ),
+                          decoration: InputDecoration(
+                            hintText: "Наименование болезни",
+                            hintStyle: TextStyle(
+                              color: Theme.of(context).primaryColor
+                            )
+                          ),
+                        )
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 15
+                        ),
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          initialValue: report.illness[i]['percent'],
+                          onChanged: (newVal){
+                            setState((){
+                              report.illness[i]['percent'] = newVal;
+                            });
+                          },
+                          textAlign: TextAlign.center,
+                          cursorHeight: 20,
+                          style: TextStyle(
+                            fontSize: 20
+                          ),
+                          decoration: InputDecoration(
+                            hintText: "Процент заражения",
+                            hintStyle: TextStyle(
+                              color: Theme.of(context).primaryColor
+                            )
+                          ),
+                        )
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 15
+                        ),
+                        child: TextFormField(
+                          initialValue: report.illness[i]['effect'],
+                          onChanged: (newVal){
+                            setState((){
+                              report.illness[i]['effect'] = newVal;
+                            });
+                          },
+                          textAlign: TextAlign.center,
+                          cursorHeight: 20,
+                          style: TextStyle(
+                            fontSize: 20
+                          ),
+                          decoration: InputDecoration(
+                            hintText: "Эффективность обработки",
+                            hintStyle: TextStyle(
+                              color: Theme.of(context).primaryColor
+                            )
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+              )
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 30
+              ),
+              child: _button(
+                "+ Добавить болезнь",
+                Theme.of(context).primaryColor,
+                (){
+                  setState((){
+                    report.illness.add({'name': '', 'percent': '', 'effect': ''});
+                  });
+                }
+              ),
+            ),
           ],
         ),
       )

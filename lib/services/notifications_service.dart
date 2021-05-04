@@ -18,7 +18,7 @@ class NotificationsService with ChangeNotifier{
         notifications.add(NotificationClass.fromJson(field));
       });
     } catch (e) {
-      ToastService().tst("Загрузка уведомлений не удалась: ${e}", Colors.red);
+      ToastService.tst("Загрузка уведомлений не удалась: ${e}", Colors.red);
     }
     loading = false;
     notifyListeners();

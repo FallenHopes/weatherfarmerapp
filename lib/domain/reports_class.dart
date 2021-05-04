@@ -13,6 +13,8 @@ class ReportsClass{
   List<String> chemicalTreatment = [];
   /**Препараты*/
   String drugs;
+  /**Болезни*/
+  List<Map<String, dynamic>> illness = [];
   ReportsClass({ this.id, this.name, this.culture, this.workDate, this.agregate, this.chemicalTreatment,
-  this.drugs});
+  this.drugs, this.illness});
 }
