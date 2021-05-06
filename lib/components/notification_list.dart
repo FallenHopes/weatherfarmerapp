@@ -16,6 +16,7 @@ class NotificationList extends StatelessWidget{
     }
     return Container(
       child: context.watch<NotificationsService>().notifications.length != 0 ? ListView.builder(
+        physics: BouncingScrollPhysics(),
         itemCount: context.watch<NotificationsService>().notifications.length,
         itemBuilder: (context, i){
           return Card(

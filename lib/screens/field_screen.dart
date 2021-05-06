@@ -111,9 +111,10 @@ class FieldScreen extends StatelessWidget {
                       child: ElevatedButton(
                         child: Text(
                           "Заполнить отчёт",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20
+                            fontSize: 14
                           ),
                         ),
                         style: ButtonStyle(
@@ -144,9 +145,10 @@ class FieldScreen extends StatelessWidget {
                       child: ElevatedButton(
                         child: Text(
                           "Назад",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20
+                            fontSize: 14
                           ),
                         ),
                         style: ButtonStyle(

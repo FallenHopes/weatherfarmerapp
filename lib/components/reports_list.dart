@@ -8,6 +8,7 @@ class ReportsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: context.watch<ReportsService>().reports != null ? ListView.builder(
+        physics: BouncingScrollPhysics(),
         itemCount: context.watch<ReportsService>().reports.length,
         itemBuilder: (context, i){
           return Card(
