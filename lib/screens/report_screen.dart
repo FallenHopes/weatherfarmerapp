@@ -169,7 +169,7 @@ class _ReportScreenState extends State<ReportScreen> {
               ),
             ),
             _headtitle("Выявленные болезни:"),
-            _illnessCard(),
+            _illnessCards(),
             Container(
               margin: EdgeInsets.symmetric(
                 horizontal: 30
@@ -280,124 +280,129 @@ class _ReportScreenState extends State<ReportScreen> {
     );
   }
 
-  Widget _illnessCard(){
+  Widget _illnessCards(){
     return Container(
       child: ListView.builder(
         itemCount: widget.report.illness.length,
-        itemBuilder: (context, i){print(widget.report.illness); return Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context).primaryColor
-            )
-          ),
-          margin: EdgeInsets.symmetric(
-            horizontal: 25,
-            vertical: 15
-          ),
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: <Widget>[
-              Positioned(
-                top: -20,
-                right: -20,
-                child: FloatingActionButton(
-                  backgroundColor: Colors.red.shade300,
-                  elevation: 2,
-                  mini: true,
-                  child: Text(
-                    "x",
+        itemBuilder: (context, i){
+          print(widget.report.illness);
+          final item = widget.report.illness[i];
+          return Container(
+            key: ObjectKey(item),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Theme.of(context).primaryColor
+              )
+            ),
+            margin: EdgeInsets.symmetric(
+              horizontal: 25,
+              vertical: 15
+            ),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: <Widget>[
+                Positioned(
+                  top: -20,
+                  right: -20,
+                  child: FloatingActionButton(
+                    backgroundColor: Colors.red.shade300,
+                    elevation: 2,
+                    mini: true,
+                    child: Text(
+                      "x",
+                      style: TextStyle(
+                        fontSize: 20
+                      ),
+                    ),
+                    onPressed: (){
+                      setState((){
+                        widget.report.illness.removeAt(i);
+                      });
+                    },
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 15
+                  ),
+                  child: TextFormField(
+                    initialValue: widget.report.illness[i]['name'],
+                    onChanged: (newVal){
+                      setState((){
+                        widget.report.illness[i]['name'] = newVal;
+                      });
+                    },
+                    textAlign: TextAlign.center,
+                    cursorHeight: 20,
                     style: TextStyle(
                       fontSize: 20
                     ),
-                  ),
-                  onPressed: (){
-                    setState((){
-                      widget.report.illness.removeAt(i);
-                    });
-                  },
+                    decoration: InputDecoration(
+                      hintText: "Наименование болезни",
+                      hintStyle: TextStyle(
+                        color: Theme.of(context).primaryColor
+                      )
+                    ),
+                  )
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: 40,
-                  vertical: 15
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 85
+                  ),
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    initialValue: widget.report.illness[i]['percent'],
+                    onChanged: (newVal){
+                      setState((){
+                        widget.report.illness[i]['percent'] = newVal;
+                      });
+                    },
+                    textAlign: TextAlign.center,
+                    cursorHeight: 20,
+                    style: TextStyle(
+                      fontSize: 20
+                    ),
+                    decoration: InputDecoration(
+                      hintText: "Процент заражения",
+                      hintStyle: TextStyle(
+                        color: Theme.of(context).primaryColor
+                      )
+                    ),
+                  )
                 ),
-                child: TextFormField(
-                  initialValue: widget.report.illness[i]['name'],
-                  onChanged: (newVal){
-                    setState((){
-                      widget.report.illness[i]['name'] = newVal;
-                    });
-                  },
-                  textAlign: TextAlign.center,
-                  cursorHeight: 20,
-                  style: TextStyle(
-                    fontSize: 20
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 155,
+                    bottom: 15,
+                    left: 40,
+                    right: 40
                   ),
-                  decoration: InputDecoration(
-                    hintText: "Наименование болезни",
-                    hintStyle: TextStyle(
-                      color: Theme.of(context).primaryColor
-                    )
-                  ),
-                )
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: 40,
-                  vertical: 85
-                ),
-                child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  initialValue: widget.report.illness[i]['percent'],
-                  onChanged: (newVal){
-                    setState((){
-                      widget.report.illness[i]['percent'] = newVal;
-                    });
-                  },
-                  textAlign: TextAlign.center,
-                  cursorHeight: 20,
-                  style: TextStyle(
-                    fontSize: 20
-                  ),
-                  decoration: InputDecoration(
-                    hintText: "Процент заражения",
-                    hintStyle: TextStyle(
-                      color: Theme.of(context).primaryColor
-                    )
-                  ),
-                )
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  top: 155,
-                  bottom: 15,
-                  left: 40,
-                  right: 40
-                ),
-                child: TextFormField(
-                  initialValue: widget.report.illness[i]['effect'],
-                  onChanged: (newVal){
-                    setState((){
-                      widget.report.illness[i]['effect'] = newVal;
-                    });
-                  },
-                  textAlign: TextAlign.center,
-                  cursorHeight: 20,
-                  style: TextStyle(
-                    fontSize: 20
-                  ),
-                  decoration: InputDecoration(
-                    hintText: "Эффективность обработки",
-                    hintStyle: TextStyle(
-                      color: Theme.of(context).primaryColor
-                    )
+                  child: TextFormField(
+                    initialValue: widget.report.illness[i]['effect'],
+                    onChanged: (newVal){
+                      setState((){
+                        widget.report.illness[i]['effect'] = newVal;
+                      });
+                    },
+                    textAlign: TextAlign.center,
+                    cursorHeight: 20,
+                    style: TextStyle(
+                      fontSize: 20
+                    ),
+                    decoration: InputDecoration(
+                      hintText: "Эффективность обработки",
+                      hintStyle: TextStyle(
+                        color: Theme.of(context).primaryColor
+                      )
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );},
+              ],
+            ),
+          );
+        },
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
