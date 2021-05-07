@@ -2,7 +2,7 @@ import 'package:latlong/latlong.dart';
 
 class NotificationClass{
   /**Айди */
-  String id;
+  int id;
   /**Название*/
   String title;
   /**Площадь*/

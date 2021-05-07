@@ -36,6 +36,7 @@ class FieldScreen extends StatelessWidget {
       ),
       body: Container(
         child: ListView(
+          physics: BouncingScrollPhysics(),
           children: <Widget>[
             myText('Площадь: ${field.square} га'),
             myText('Технология посева: ${field.sowingTechnology}'),

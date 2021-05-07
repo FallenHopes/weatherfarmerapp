@@ -17,6 +17,8 @@ dependencies:
   flutter_map: any
   http: any
   fluttertoast: any
+  sqflite: any
+  path: any
 
 dev_dependencies:
   flutter_test:

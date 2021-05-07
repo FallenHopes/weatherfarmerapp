@@ -23,7 +23,7 @@ class NotificationsService with ChangeNotifier{
     loading = false;
     notifyListeners();
   }
-  void removeNotification(String id) async{
+  void removeNotification(int id) async{
     // Async code
     notifications.removeWhere((nt) => nt.id == id);
     notifyListeners();

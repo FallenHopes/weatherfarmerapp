@@ -55,7 +55,10 @@ class LeftPanel extends StatelessWidget {
                 screenChanger(1);
                 Navigator.of(context).pop();
               },
-              trailing: Container(
+              trailing: context.watch<ReportsService>().reports != null
+              &&
+              context.watch<ReportsService>().reports.length != 0
+              ? Container(
                 width: 25,
                 height: 25,
                 alignment: Alignment.center,
@@ -69,6 +72,8 @@ class LeftPanel extends StatelessWidget {
                   )
                 ),
               )
+              :
+              null
             ),
             ListTile(
               leading: Icon(Icons.exit_to_app),

@@ -6,8 +6,16 @@ import 'package:weatherfarmer/services/reports_service.dart';
 class ReportsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    if (context.watch<ReportsService>().loading){
+      return Scaffold(
+        body: Container(
+          alignment: Alignment.center,
+          child: Text("Загрузка...")
+        )
+      );
+    }
     return Container(
-      child: context.watch<ReportsService>().reports != null ? ListView.builder(
+      child: context.watch<ReportsService>().reports != null && context.watch<ReportsService>().reports.length != 0 ? ListView.builder(
         physics: BouncingScrollPhysics(),
         itemCount: context.watch<ReportsService>().reports.length,
         itemBuilder: (context, i){
@@ -43,7 +51,7 @@ class ReportsList extends StatelessWidget {
       ) : Scaffold(
         body: Container(
           alignment: Alignment.center,
-          child: Text("Загрузка...")
+          child: Text("Отчётов пока нет")
         )
       )
     );
