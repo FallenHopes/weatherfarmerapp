@@ -61,6 +61,7 @@ class ReportsService with ChangeNotifier{
       // Async code
       await DatabaseService.db.delete(report.id);
       reports.removeWhere((rep) => rep.id == report.id);
+      notifyListeners();
       ToastService.tst("Отчёт отправлен", Colors.green);
       loading = false;
       notifyListeners();

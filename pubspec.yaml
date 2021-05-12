@@ -19,6 +19,8 @@ dependencies:
   fluttertoast: any
   sqflite: any
   path: any
+  firebase_core: any
+  firebase_messaging: any
 
 dev_dependencies:
   flutter_test:

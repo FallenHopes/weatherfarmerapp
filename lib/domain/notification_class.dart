@@ -37,16 +37,16 @@ class NotificationClass{
       id: json['id'],
       title: json['title'],
       square: json['square'],
-      sowingTechnology: json['sowingTechnology'],
-      moistureStorage: json['moistureStorage'].toDouble(),
+      sowingTechnology: json['sowing_technology'],
+      moistureStorage: json['moisture_storage'].toDouble(),
       organoleptically: json['organoleptically'],
       relief: json['relief'],
       slope: json['slope'],
-      soilType: json['soilType'],
-      kindOfSoil: json['kindOfSoil'],
-      soilVariety: json['soilVariety'],
+      soilType: json['soil_type'],
+      kindOfSoil: json['kind_of_soil'],
+      soilVariety: json['soil_variety'],
       recommendations: json['recommendations'],
-      coordinates: LatLng(json['coordinates'][0], json['coordinates'][1])
+      coordinates: LatLng(json['lat'], json['lng'])
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weatherfarmer/screens/auth.dart';
 import 'package:weatherfarmer/screens/main_screen.dart';
 import 'package:weatherfarmer/services/auth_service.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() => runApp(WeatherFarmer());
 
@@ -16,6 +17,7 @@ class _WeatherFarmerState extends State<WeatherFarmer> {
   SharedPreferences localStorage;
   AuthService authService;
   void getData() async{
+    await Firebase.initializeApp();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState((){
       localStorage = prefs;
@@ -54,6 +56,6 @@ class _WeatherFarmerState extends State<WeatherFarmer> {
 class DefaultPages extends StatelessWidget{
   @override
   Widget build(BuildContext context) {    
-    return context.watch<AuthService>().authToken != null ? MainScreen() : AuthScreen();
+    return context.watch<AuthService>().authToken != null ? MainScreen(token: context.watch<AuthService>().authToken) : AuthScreen();
   }
 }

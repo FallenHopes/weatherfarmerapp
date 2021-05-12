@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:weatherfarmer/components/left_drawer.dart';
 import 'package:provider/provider.dart';
+import 'package:weatherfarmer/services/auth_service.dart';
 import 'package:weatherfarmer/services/reports_service.dart';
 import '../services/notifications_service.dart';
 import 'list_selector.dart';
 
 class MainScreen extends StatefulWidget {
+  String token;
+  MainScreen({@required this.token});
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -21,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
   }
   @override
   void initState(){
-    ntfcs.getNotificationsFromServer();
+    ntfcs.getNotificationsFromServer(widget.token);
     rpts.getReportsFromLocalStorage();
     super.initState();
   }

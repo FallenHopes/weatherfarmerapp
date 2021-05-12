@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "458307004779",
+    "project_id": "weatherfarmer-notifications",
+    "storage_bucket": "weatherfarmer-notifications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458307004779:android:28b999917daea0e877c42e",
+        "android_client_info": {
+          "package_name": "com.example.weatherfarmer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458307004779-sfdjrc9tlsib752p0v9lsiq2i4r6jabu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2eCUygEvsei3h1oPztFswuR3jGNwwaTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458307004779-sfdjrc9tlsib752p0v9lsiq2i4r6jabu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
